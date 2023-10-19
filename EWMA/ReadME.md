@@ -5,11 +5,11 @@ This repository contains a Shiny app for backtesting a Dual Exponentially Weight
 
 ### Part I: Dual EWMA Moving Average Crossover Strategy Shiny App
 #### Shiny App Files
-- `app_ewma_dual_strat_hw.R`: This file contains the code for the Shiny app that enables users to backtest the Dual EWMA Moving Average Crossover Strategy interactively.
+- `app_ewma_strat_hw.R`: This file contains the code for the Shiny app that enables users to backtest the Dual EWMA Moving Average Crossover Strategy interactively.
 - `shiny_ewma_strat1.png`, `shiny_ewma_strat2.png`, `shiny_ewma_strat3.png`, `shiny_ewma_strat4.png`: Sample output images from the Shiny app demonstrating strategy performance for different ETFs.
 
 #### How to Use the Shiny App
-1. Run the `app_ewma_dual_strat_hw.R` script in your R environment.
+1. Run the `app_dual_strat_hw.R` script in your R environment.
 2. Access the Shiny app by opening the provided URL in your web browser.
 3. Select an ETF, set decay parameters, adjust the lag, and optionally add buy/sell annotations.
 4. Visualize the cumulative returns, strategy performance, and trading signals interactively.
