@@ -25,6 +25,6 @@ This repository contains a Shiny app for backtesting a Dual Exponentially Weight
 3. Analyze the output to identify optimal parameters that yield superior risk-adjusted returns for the Hampel trading strategy.
 
 ### Conclusion
-These tools provide traders and investors with valuable resources for strategy backtesting, visualization, and optimization. Utilize the Shiny app to interactively test the Dual EWMA Moving Average Crossover Strategy and explore different ETFs. Additionally, leverage the parameter optimization script to identify optimal parameters for the Hampel trading strategy, enhancing your trading decisions.
+These tools provide traders and investors with valuable resources for strategy backtesting, visualization, and optimization. Utilize the Shiny app to interactively test the Dual EWMA (Exponential Moving Average) Crossover Strategy and explore different ETFs. Additionally, leverage the parameter optimization script to identify optimal parameters for the Hampel trading strategy, enhancing your trading decisions.
 
 *Note: Users are encouraged to thoroughly understand the strategies and carefully consider market conditions before implementing any trading strategies in live trading environments.*
