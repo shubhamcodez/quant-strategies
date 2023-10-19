@@ -1,7 +1,7 @@
-## Dual EWMA Moving Average Crossover Strategy: Shiny App and Hampel Parameter Optimization
+## Dual EWMA Moving Average Crossover Strategy: with Hampel Parameter Optimization
 
 ### Introduction
-This repository contains two major components: a Shiny app for backtesting a Dual Exponentially Weighted Moving Average (EWMA) crossover strategy and R scripts for optimizing parameters of the Hampel trading strategy. These tools provide valuable insights into financial trading strategies and empower users to explore, visualize, and optimize their trading decisions.
+This repository contains a Shiny app for backtesting a Dual Exponentially Weighted Moving Average (EWMA) crossover strategy and R scripts for optimizing parameters of the Hampel trading strategy. These tools provide valuable insights into financial trading strategies and empower users to explore, visualize, and optimize their trading decisions.
 
 ### Part I: Dual EWMA Moving Average Crossover Strategy Shiny App
 #### Shiny App Files
