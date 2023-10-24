@@ -13,18 +13,6 @@ openp <- quantmod::Op(ohlc)
 closep <- quantmod::Cl(ohlc)
 retp <- rutils::diffit(closep)
 
-## End of setup code
-
-
-# 1. (20pts)
-# Calculate the close prices on Fridays (closef) 
-# and the open prices on the following business 
-# day (openn).
-# 
-# You can use the functions zoo::index(), 
-# weekdays(), which(), NROW(), and min(). 
-
-### Write your code here
 friday_indexes <- zoo::index(ohlc)[weekdays(zoo::index(ohlc)) == "Friday"]
 closef <- data.frame(VTI.Close = numeric(length(friday_indexes)))
 openn <- data.frame(VTI.Open = numeric(length(friday_indexes)))
@@ -62,19 +50,6 @@ tail(openn)
 # 2023-09-01   225.34
 
 
-# 2. (20pts)
-# Calculate the strategy pnls as the difference 
-# between the open prices on the following business 
-# day (openn), minus the close prices on Fridays 
-# (closef). 
-# Combine (cbind) the strategy pnls with the daily 
-# VTI returns (retp).  Set the NA values to zero.
-
-# You can use the functions zoo::coredata(), 
-# xts::xts(), zoo::index(), cbind(), colnames(), 
-# is.na(), cumsum(),and dygraphs::dygraph().
-
-### Write your code here
 strategy_pnls = zoo::coredata(openn) - zoo::coredata(closef)
 #strategy_pnls[is.na(strategy_pnls)] <- 0
 strategy_pnls_xts <- xts(strategy_pnls, order.by = zoo::index(openn))
@@ -103,21 +78,12 @@ tail(wealthv)
 # 2023-09-01  0.74    0.66
 
 # Plot the cumulative wealths.
-# Your plot should be similar to seasonal_weekend.png
 
 ### Write your code here
 dygraph(cumsum(wealthv), main = "Weekend Strategy") %>%
   dySeries("VTI", label = "VTI", col = "blue") %>%
   dySeries("weekend", label = "weekend", col = "red") %>%
   dyRangeSelector()
-
-
-
-############## Part II
-# Summary: Simulate a moving average strategy using 
-# fast and slow trailing volatilities.
-
-## Run the setup code below
 
 library(rutils)
 retp <- na.omit(rutils::etfenv$returns$VTI)
@@ -126,15 +92,6 @@ nrows <- NROW(retp)
 lambdaf <- 0.8 # Slow lambda
 lambdas <- 0.9 # Fast lambda
 
-## End of setup code
-
-# 1. (20pts) 
-# Calculate the fast (volf) and slow (vols) trailing 
-# volatilities of retp using lambdaf and lambdas.
-# You can use the functions HighFreq::run_var()
-# and sqrt(). 
-
-### Write your code here
 library(HighFreq)
 volf <- sqrt(HighFreq::run_var(retp,lambda = lambdaf))
 vols <- sqrt(HighFreq::run_var(retp,lambda = lambdas))
@@ -168,7 +125,6 @@ tail(vols)
 # Adapt code from the slide: 
 #   Simulation Function for the Dual EWMA Crossover Strategy
 
-### Write your code here
 sim_volma <- function(lambdaf, lambdas) {
 if (lambdaf >= lambdas) return(NA)
   # Calculate the EWMA prices
@@ -214,15 +170,6 @@ tail(pnls)
 # 2023-09-01         1  0.003299009
 
 
-# 2. (20pts) 
-# Create a function called calc_sharpe(), which calls 
-# sim_volma() to simulate a moving average strategy 
-# using trailing volatilities, and calculates the Sharpe 
-# ratio.
-# Adapt code from the slide: 
-#   Dual EWMA Strategy Performance Matrix
-
-### Write your code here
 calc_sharpe <- function(lambdaf, lambdas) {
   if (lambdaf >= lambdas) return(NA)
   pnls <- sim_volma(lambdaf=lambdaf, lambdas=lambdas)[, "pnls"]
@@ -239,13 +186,6 @@ sharper
 lambdafv <- seq(from=0.8, to=0.99, by=0.01)
 lambdasv <- seq(from=0.8, to=0.99, by=0.01)
 
-
-# Calculate a matrix of Sharpe ratios for the vectors 
-# lambdafv and lambdasv.
-# You can perform two sapply() loops over the lambda 
-# vectors.
-
-### Write your code here
 sharpem <- sapply(lambdasv, function(lambdas) {
   sapply(lambdafv, function(lambdaf) {
     calc_sharpe(lambdaf, lambdas)
@@ -285,7 +225,6 @@ round(sharpem, 2)
 # Adapt code from the slide: 
 #   Optimal Dual EWMA Strategy
 
-### Write your code here
 whichv <- which(sharpem == max(sharpem, na.rm=TRUE), arr.ind=TRUE)
 lambdaf <- lambdafv[whichv[1]]
 lambdas <- lambdasv[whichv[2]]
@@ -304,9 +243,7 @@ sharper
 
 # Plot a dygraph of the optimal strategy with shading.
 # Don't use end dates.
-# Your plot should be similar to ewvol_optim.png
 
-### Write your code here
 posv <- volma_opt[, "positions"]
 crossd <- (rutils::diffit(posv) != 0)
 shadev <- posv[crossd]
